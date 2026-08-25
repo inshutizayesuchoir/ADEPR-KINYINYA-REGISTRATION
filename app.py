@@ -781,7 +781,6 @@ with col2:
     igitsina = st.selectbox(
         "Igitsina",
         [
-            "Ntabwo nshaka kubivuga",
             "Gabo",
             "Gore"
         ],
