@@ -1,902 +1,219 @@
-/* =========================================================
-   ADEPR KINYINYA REGISTRATION
-   SUPABASE CONNECTION
-========================================================= */
-
-
-/* =========================================================
-   SUPABASE
-========================================================= */
+// ============================================================
+// ADEPR KINYINYA REGISTRATION
+// Supabase Connection
+// ============================================================
 
 const SUPABASE_URL =
     "https://mtvfebrbxalqymiiqtqe.supabase.co";
 
-const SUPABASE_PUBLISHABLE_KEY =
+const SUPABASE_KEY =
     "sb_publishable_6rY0yOE6-A-tvmJFNRQBjA_Hwci4qlh";
 
 
+// Create Supabase client
 const supabaseClient =
     window.supabase.createClient(
         SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
+        SUPABASE_KEY
     );
 
 
-/* =========================================================
-   RWANDA ADMINISTRATIVE DATA
-   API SOURCE
-========================================================= */
-
-const RWANDA_API =
-    "https://rwanda-province-district-sector-cel.vercel.app/api";
-
-
-/* =========================================================
-   ELEMENT HELPERS
-========================================================= */
-
-function getElement(id) {
-
-    return document.getElementById(id);
-
-}
-
-
-function clearSelect(select, placeholder) {
-
-    select.innerHTML = "";
-
-    const option =
-        document.createElement("option");
-
-    option.value = "";
-
-    option.textContent = placeholder;
-
-    select.appendChild(option);
-
-}
-
-
-function setLoading(select, text) {
-
-    select.disabled = true;
-
-    clearSelect(select, text);
-
-}
-
-
-/* =========================================================
-   FETCH JSON
-========================================================= */
-
-async function getJSON(url) {
-
-    const response =
-        await fetch(url);
-
-    if (!response.ok) {
-
-        throw new Error(
-            "Location data could not be loaded."
-        );
-
-    }
-
-    return await response.json();
-
-}
-
-
-/* =========================================================
-   ADD OPTIONS
-========================================================= */
-
-function addOptions(
-    select,
-    items,
-    valueKey,
-    textKey
-) {
-
-    items.forEach(item => {
-
-        const option =
-            document.createElement("option");
-
-        option.value =
-            item[valueKey];
-
-        option.textContent =
-            item[textKey];
-
-        select.appendChild(option);
-
-    });
-
-}
-
-
-/* =========================================================
-   PROVINCES
-========================================================= */
-
-async function loadProvinces(
-    provinceSelect
-) {
-
-    clearSelect(
-        provinceSelect,
-        "Hitamo Intara"
-    );
-
-    try {
-
-        const data =
-            await getJSON(
-                `${RWANDA_API}/provinces`
-            );
-
-
-        /*
-         The API normally returns:
-         [
-             {
-                id: 1,
-                provinceName: "Kigali"
-             }
-         ]
-        */
-
-        data.forEach(item => {
-
-            const option =
-                document.createElement("option");
-
-            option.value =
-                item.id;
-
-            option.textContent =
-                item.provinceName;
-
-            provinceSelect.appendChild(
-                option
-            );
-
-        });
-
-        provinceSelect.disabled = false;
-
-    } catch (error) {
-
-        console.error(error);
-
-        clearSelect(
-            provinceSelect,
-            "Andika Intara"
-        );
-
-        provinceSelect.disabled = false;
-
-    }
-
-}
-
-
-/* =========================================================
-   DISTRICTS
-========================================================= */
-
-async function loadDistricts(
-    provinceId,
-    districtSelect,
-    sectorSelect,
-    cellSelect,
-    villageSelect
-) {
-
-    setLoading(
-        districtSelect,
-        "Gutegereza Akarere..."
-    );
-
-    setLoading(
-        sectorSelect,
-        "Banza uhitemo Akarere"
-    );
-
-    setLoading(
-        cellSelect,
-        "Banza uhitemo Umurenge"
-    );
-
-    setLoading(
-        villageSelect,
-        "Banza uhitemo Akagari"
-    );
-
-
-    if (!provinceId) {
-
-        clearSelect(
-            districtSelect,
-            "Banza uhitemo Intara"
-        );
-
-        districtSelect.disabled = true;
-
-        return;
-
-    }
-
-
-    try {
-
-        const data =
-            await getJSON(
-                `${RWANDA_API}/districts/${provinceId}`
-            );
-
-
-        clearSelect(
-            districtSelect,
-            "Hitamo Akarere"
-        );
-
-
-        data.forEach(item => {
-
-            const option =
-                document.createElement("option");
-
-            option.value =
-                item.id;
-
-            option.textContent =
-                item.districtName;
-
-            districtSelect.appendChild(
-                option
-            );
-
-        });
-
-
-        districtSelect.disabled = false;
-
-    } catch (error) {
-
-        console.error(error);
-
-        clearSelect(
-            districtSelect,
-            "Andika Akarere"
-        );
-
-        districtSelect.disabled = false;
-
-    }
-
-}
-
-
-/* =========================================================
-   SECTORS
-========================================================= */
-
-async function loadSectors(
-    provinceId,
-    districtId,
-    sectorSelect,
-    cellSelect,
-    villageSelect
-) {
-
-    setLoading(
-        sectorSelect,
-        "Gutegereza Umurenge..."
-    );
-
-    setLoading(
-        cellSelect,
-        "Banza uhitemo Umurenge"
-    );
-
-    setLoading(
-        villageSelect,
-        "Banza uhitemo Akagari"
-    );
-
-
-    if (!districtId) {
-
-        clearSelect(
-            sectorSelect,
-            "Banza uhitemo Akarere"
-        );
-
-        sectorSelect.disabled = true;
-
-        return;
-
-    }
-
-
-    try {
-
-        const url =
-            `${RWANDA_API}/sectors/${provinceId}/${districtId}`;
-
-
-        const data =
-            await getJSON(url);
-
-
-        clearSelect(
-            sectorSelect,
-            "Hitamo Umurenge"
-        );
-
-
-        data.forEach(item => {
-
-            const option =
-                document.createElement("option");
-
-            option.value =
-                item.id;
-
-            option.textContent =
-                item.sectorName;
-
-            sectorSelect.appendChild(
-                option
-            );
-
-        });
-
-
-        sectorSelect.disabled = false;
-
-    } catch (error) {
-
-        console.error(error);
-
-        clearSelect(
-            sectorSelect,
-            "Andika Umurenge"
-        );
-
-        sectorSelect.disabled = false;
-
-    }
-
-}
-
-
-/* =========================================================
-   CELLS
-========================================================= */
-
-async function loadCells(
-    provinceId,
-    districtId,
-    sectorId,
-    cellSelect,
-    villageSelect
-) {
-
-    setLoading(
-        cellSelect,
-        "Gutegereza Akagari..."
-    );
-
-    setLoading(
-        villageSelect,
-        "Banza uhitemo Akagari"
-    );
-
-
-    if (!sectorId) {
-
-        clearSelect(
-            cellSelect,
-            "Banza uhitemo Umurenge"
-        );
-
-        cellSelect.disabled = true;
-
-        return;
-
-    }
-
-
-    try {
-
-        const url =
-            `${RWANDA_API}/cells/${provinceId}/${districtId}/${sectorId}`;
-
-
-        const data =
-            await getJSON(url);
-
-
-        clearSelect(
-            cellSelect,
-            "Hitamo Akagari"
-        );
-
-
-        data.forEach(item => {
-
-            const option =
-                document.createElement("option");
-
-            option.value =
-                item.id;
-
-            option.textContent =
-                item.cellName;
-
-            cellSelect.appendChild(
-                option
-            );
-
-        });
-
-
-        cellSelect.disabled = false;
-
-    } catch (error) {
-
-        console.error(error);
-
-        clearSelect(
-            cellSelect,
-            "Andika Akagari"
-        );
-
-        cellSelect.disabled = false;
-
-    }
-
-}
-
-
-/* =========================================================
-   VILLAGES
-========================================================= */
-
-async function loadVillages(
-    provinceId,
-    districtId,
-    sectorId,
-    cellId,
-    villageSelect
-) {
-
-    setLoading(
-        villageSelect,
-        "Gutegereza Umudugudu..."
-    );
-
-
-    if (!cellId) {
-
-        clearSelect(
-            villageSelect,
-            "Banza uhitemo Akagari"
-        );
-
-        villageSelect.disabled = true;
-
-        return;
-
-    }
-
-
-    try {
-
-        const url =
-            `${RWANDA_API}/villages/${provinceId}/${districtId}/${sectorId}/${cellId}`;
-
-
-        const data =
-            await getJSON(url);
-
-
-        clearSelect(
-            villageSelect,
-            "Hitamo Umudugudu"
-        );
-
-
-        data.forEach(item => {
-
-            const option =
-                document.createElement("option");
-
-            option.value =
-                item.id;
-
-            option.textContent =
-                item.villageName;
-
-            villageSelect.appendChild(
-                option
-            );
-
-        });
-
-
-        villageSelect.disabled = false;
-
-    } catch (error) {
-
-        console.error(error);
-
-        clearSelect(
-            villageSelect,
-            "Andika Umudugudu"
-        );
-
-        villageSelect.disabled = false;
-
-    }
-
-}
-
-
-/* =========================================================
-   LOCATION SETUP
-========================================================= */
-
-function setupLocation(prefix) {
-
-    const province =
-        getElement(
-            `${prefix}_province`
-        );
-
-    const district =
-        getElement(
-            `${prefix}_district`
-        );
-
-    const sector =
-        getElement(
-            `${prefix}_sector`
-        );
-
-    const cell =
-        getElement(
-            `${prefix}_cell`
-        );
-
-    const village =
-        getElement(
-            `${prefix}_village`
-        );
-
-
-    /*
-     Load provinces
-    */
-
-    loadProvinces(
-        province
-    );
-
-
-    /*
-     Province changed
-    */
-
-    province.addEventListener(
-        "change",
-        function () {
-
-            loadDistricts(
-                this.value,
-                district,
-                sector,
-                cell,
-                village
-            );
-
-        }
-    );
-
-
-    /*
-     District changed
-    */
-
-    district.addEventListener(
-        "change",
-        function () {
-
-            loadSectors(
-                province.value,
-                this.value,
-                sector,
-                cell,
-                village
-            );
-
-        }
-    );
-
-
-    /*
-     Sector changed
-    */
-
-    sector.addEventListener(
-        "change",
-        function () {
-
-            loadCells(
-                province.value,
-                district.value,
-                this.value,
-                cell,
-                village
-            );
-
-        }
-    );
-
-
-    /*
-     Cell changed
-    */
-
-    cell.addEventListener(
-        "change",
-        function () {
-
-            loadVillages(
-                province.value,
-                district.value,
-                sector.value,
-                this.value,
-                village
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   INITIALIZE LOCATIONS
-========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        setupLocation(
-            "birth"
-        );
-
-        setupLocation(
-            "current"
-        );
-
-    }
-);
-
-
-/* =========================================================
-   VALUE HELPER
-========================================================= */
-
-function value(id) {
-
-    const element =
-        getElement(id);
-
-    if (!element) {
-
-        return null;
-
-    }
-
-    const result =
-        element.value.trim();
-
-    return result === ""
-        ? null
-        : result;
-
-}
-
-
-/* =========================================================
-   FORM
-========================================================= */
+// ============================================================
+// FORM
+// ============================================================
 
 const form =
-    getElement("memberForm");
+    document.getElementById("memberForm");
 
+const submitButton =
+    document.getElementById("submitButton");
+
+const buttonText =
+    document.getElementById("buttonText");
+
+const loadingText =
+    document.getElementById("loadingText");
+
+const message =
+    document.getElementById("message");
+
+
+// ============================================================
+// MESSAGE FUNCTION
+// ============================================================
+
+function showMessage(text, type) {
+
+    message.textContent = text;
+
+    message.className =
+        "message " + type;
+
+    message.style.display =
+        "block";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+// ============================================================
+// GET VALUE
+// ============================================================
+
+function getValue(id) {
+
+    const element =
+        document.getElementById(id);
+
+    if (!element) {
+        return null;
+    }
+
+    const value =
+        element.value.trim();
+
+    return value === ""
+        ? null
+        : value;
+}
+
+
+// ============================================================
+// FORM SUBMIT
+// ============================================================
 
 form.addEventListener(
     "submit",
-    async function (event) {
+    async function(event) {
 
         event.preventDefault();
 
 
-        /*
-         Hide old messages
-        */
+        // ====================================================
+        // REQUIRED FIELD
+        // ====================================================
 
-        getElement(
-            "successMessage"
-        ).classList.add("hidden");
-
-        getElement(
-            "errorMessage"
-        ).classList.add("hidden");
+        const amazina =
+            getValue("amazina");
 
 
-        /*
-         Button loading
-        */
+        if (!amazina) {
 
-        const button =
-            getElement("submitButton");
+            showMessage(
+                "❌ Amazina ni yo yonyine asabwa.",
+                "error"
+            );
 
-        const buttonText =
-            getElement("buttonText");
+            document
+                .getElementById("amazina")
+                .focus();
 
-        const spinner =
-            getElement("loadingSpinner");
-
-
-        button.disabled = true;
-
-        buttonText.textContent =
-            "Kubika amakuru...";
-
-        spinner.classList.remove(
-            "hidden"
-        );
+            return;
+        }
 
 
-        /*
-         Prepare data
-        */
+        // ====================================================
+        // DISABLE BUTTON
+        // ====================================================
+
+        submitButton.disabled =
+            true;
+
+        buttonText.style.display =
+            "none";
+
+        loadingText.style.display =
+            "inline";
+
+
+        message.style.display =
+            "none";
+
+
+        // ====================================================
+        // DATA
+        // ====================================================
 
         const data = {
 
+            // Personal
             amazina:
-                value("amazina"),
+                amazina,
 
             telephone:
-                value("telephone"),
+                getValue("telephone"),
 
             irangamuntu:
-                value("irangamuntu"),
+                getValue("irangamuntu"),
 
             itariki_yamavuko:
-                value("itariki_yamavuko"),
+                getValue("itariki_yamavuko"),
 
             igitsina:
-                value("igitsina"),
+                getValue("igitsina"),
 
             aho_yabatirijwe:
-                value("aho_yabatirijwe"),
+                getValue("aho_yabatirijwe"),
 
 
-            /*
-             Birthplace
-            */
-
+            // Birthplace
             yavukiye_intara:
-                getSelectedText(
-                    "birth_province"
-                ),
+                getValue("yavukiye_intara"),
 
             yavukiye_akarere:
-                getSelectedText(
-                    "birth_district"
-                ),
+                getValue("yavukiye_akarere"),
 
             yavukiye_umurenge:
-                getSelectedText(
-                    "birth_sector"
-                ),
+                getValue("yavukiye_umurenge"),
 
             yavukiye_akagari:
-                getSelectedText(
-                    "birth_cell"
-                ),
+                getValue("yavukiye_akagari"),
 
             yavukiye_umudugudu:
-                getSelectedText(
-                    "birth_village"
-                ),
+                getValue("yavukiye_umudugudu"),
 
 
-            /*
-             Current residence
-            */
-
+            // Current address
             atuye_intara:
-                getSelectedText(
-                    "current_province"
-                ),
+                getValue("atuye_intara"),
 
             atuye_akarere:
-                getSelectedText(
-                    "current_district"
-                ),
+                getValue("atuye_akarere"),
 
             atuye_umurenge:
-                getSelectedText(
-                    "current_sector"
-                ),
+                getValue("atuye_umurenge"),
 
             atuye_akagari:
-                getSelectedText(
-                    "current_cell"
-                ),
+                getValue("atuye_akagari"),
 
             atuye_umudugudu:
-                getSelectedText(
-                    "current_village"
-                ),
+                getValue("atuye_umudugudu"),
 
 
-            /*
-             Church
-            */
-
+            // Church
             igihande:
-                value("igihande"),
+                getValue("igihande"),
 
             umurimo_itorero:
-                value("umurimo_itorero"),
+                getValue("umurimo_itorero"),
 
             chorale:
-                value("chorale"),
+                getValue("chorale"),
 
 
-            /*
-             Emergency
-            */
-
+            // Emergency
             emergency_contact:
-                value("emergency_contact")
+                getValue("emergency_contact")
 
         };
 
 
-        /*
-         Empty strings -> null
-        */
-
-        Object.keys(data).forEach(
-            key => {
-
-                if (
-                    data[key] === ""
-                    ||
-                    data[key] === undefined
-                ) {
-
-                    data[key] = null;
-
-                }
-
-            }
-        );
-
+        // ====================================================
+        // SEND TO SUPABASE
+        // ====================================================
 
         try {
 
@@ -910,227 +227,82 @@ form.addEventListener(
                     .select();
 
 
+            // =================================================
+            // ERROR
+            // =================================================
+
             if (error) {
 
-                throw error;
+                console.error(
+                    "Supabase Error:",
+                    error
+                );
 
+                throw error;
             }
 
 
-            /*
-             SUCCESS
-            */
+            // =================================================
+            // SUCCESS
+            // =================================================
 
-            getElement(
-                "successMessage"
-            ).classList.remove(
-                "hidden"
+            console.log(
+                "Saved member:",
+                insertedData
             );
 
 
-            /*
-             Scroll to success
-            */
-
-            getElement(
-                "successMessage"
-            ).scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
+            showMessage(
+                "✅ Murakoze! Amakuru yawe yabitswe neza muri ADEPR KINYINYA.",
+                "success"
+            );
 
 
-            /*
-             Reset form
-            */
-
+            // Clear form
             form.reset();
-
-
-            /*
-             Reset locations
-            */
-
-            resetLocation(
-                "birth"
-            );
-
-            resetLocation(
-                "current"
-            );
 
 
         } catch (error) {
 
-            console.error(
-                "Supabase error:",
-                error
-            );
+            console.error(error);
 
 
-            let message =
-                "Ntabwo amakuru yabitswe. " +
-                "Ongera ugerageze.";
+            let errorMessage =
+                "❌ Habaye ikibazo mu kubika amakuru. Ongera ugerageze.";
 
 
             if (
-                error &&
-                error.message
+                error.message &&
+                error.message.includes("duplicate")
             ) {
 
-                message =
-                    error.message;
+                errorMessage =
+                    "❌ Iyi nimero y'irangamuntu isanzwe iri muri system.";
 
             }
 
 
-            getElement(
-                "errorText"
-            ).textContent =
-                message;
-
-
-            getElement(
-                "errorMessage"
-            ).classList.remove(
-                "hidden"
+            showMessage(
+                errorMessage,
+                "error"
             );
 
-
-            getElement(
-                "errorMessage"
-            ).scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
 
         } finally {
 
-            button.disabled = false;
+            // =================================================
+            // ENABLE BUTTON
+            // =================================================
 
-            buttonText.textContent =
-                "💾 BIKA AMAKURU";
+            submitButton.disabled =
+                false;
 
-            spinner.classList.add(
-                "hidden"
-            );
+            buttonText.style.display =
+                "inline";
 
+            loadingText.style.display =
+                "none";
         }
 
     }
 );
-
-
-/* =========================================================
-   SELECTED TEXT
-========================================================= */
-
-function getSelectedText(id) {
-
-    const select =
-        getElement(id);
-
-    if (!select) {
-
-        return null;
-
-    }
-
-    if (
-        select.selectedIndex < 0
-    ) {
-
-        return null;
-
-    }
-
-    const option =
-        select.options[
-            select.selectedIndex
-        ];
-
-
-    if (
-        !option
-        ||
-        !option.value
-    ) {
-
-        return null;
-
-    }
-
-
-    return option.textContent.trim();
-
-}
-
-
-/* =========================================================
-   RESET LOCATION
-========================================================= */
-
-function resetLocation(prefix) {
-
-    const province =
-        getElement(
-            `${prefix}_province`
-        );
-
-    const district =
-        getElement(
-            `${prefix}_district`
-        );
-
-    const sector =
-        getElement(
-            `${prefix}_sector`
-        );
-
-    const cell =
-        getElement(
-            `${prefix}_cell`
-        );
-
-    const village =
-        getElement(
-            `${prefix}_village`
-        );
-
-
-    clearSelect(
-        district,
-        "Banza uhitemo Intara"
-    );
-
-    clearSelect(
-        sector,
-        "Banza uhitemo Akarere"
-    );
-
-    clearSelect(
-        cell,
-        "Banza uhitemo Umurenge"
-    );
-
-    clearSelect(
-        village,
-        "Banza uhitemo Akagari"
-    );
-
-
-    district.disabled = true;
-    sector.disabled = true;
-    cell.disabled = true;
-    village.disabled = true;
-
-
-    /*
-     Reload provinces
-    */
-
-    loadProvinces(
-        province
-    );
-
-}
