@@ -1006,7 +1006,7 @@ emergency_contact = st.text_input(
 st.write("")
 
 submit = st.button(
-    "📋 OHEREZA KWIYANDIKISHA",
+    "📋KANDA HANO WOHEREZA KWIYANDIKISHA",
     use_container_width=True,
     type="primary",
     key="submit_registration"
