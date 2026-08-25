@@ -1,0 +1,944 @@
+/* =========================================================
+   ADEPR KINYINYA REGISTRATION
+   GEORGIA PROFESSIONAL DESIGN
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8fafc 0%,
+            #eef5f2 50%,
+            #f8fafc 100%
+        );
+
+    color: #1e293b;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page-wrapper {
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #064e3b,
+            #047857 55%,
+            #059669
+        );
+
+    color: white;
+
+    padding:
+        38px 24px
+        42px;
+
+    box-shadow:
+        0 12px 40px
+        rgba(6, 78, 59, .20);
+}
+
+
+.hero-pattern {
+
+    position: absolute;
+
+    width: 360px;
+    height: 360px;
+
+    right: -130px;
+    top: -200px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.07);
+}
+
+
+.hero-pattern::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 250px;
+    height: 250px;
+
+    left: -420px;
+    top: 250px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.05);
+}
+
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+
+.church-logo {
+
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,.14);
+
+    border:
+        1px solid
+        rgba(255,255,255,.22);
+
+    font-size: 35px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.12);
+}
+
+
+.church-name {
+
+    font-size: 32px;
+
+    font-weight: 700;
+
+    letter-spacing: .4px;
+}
+
+
+.system-name {
+
+    margin-top: 5px;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+    opacity: .82;
+}
+
+
+.hero-subtitle {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 1100px;
+
+    margin:
+        22px auto 0;
+
+    font-size: 16px;
+
+    color:
+        rgba(255,255,255,.88);
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main-container {
+
+    width: min(
+        1100px,
+        calc(100% - 32px)
+    );
+
+    margin:
+        30px auto
+        60px;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.intro-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+
+    background:
+        rgba(255,255,255,.96);
+
+    border:
+        1px solid #dbe4e8;
+
+    border-radius: 20px;
+
+    padding: 23px 25px;
+
+    margin-bottom: 22px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(15,23,42,.05);
+}
+
+
+.intro-icon {
+
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background:
+        #ecfdf5;
+
+    border:
+        1px solid #a7f3d0;
+
+    font-size: 24px;
+}
+
+
+.intro-card h1 {
+
+    margin: 0;
+
+    color: #064e3b;
+
+    font-size: 25px;
+}
+
+
+.intro-card p {
+
+    margin:
+        6px 0 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   FORM SECTION
+========================================================= */
+
+.form-section {
+
+    background:
+        rgba(255,255,255,.97);
+
+    border:
+        1px solid #dbe4e8;
+
+    border-radius: 22px;
+
+    padding: 27px;
+
+    margin-bottom: 22px;
+
+    box-shadow:
+        0 8px 28px
+        rgba(15,23,42,.055);
+}
+
+
+.section-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding-bottom: 18px;
+
+    margin-bottom: 21px;
+
+    border-bottom:
+        1px solid #e5e7eb;
+}
+
+
+.section-icon {
+
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ecfdf5,
+            #d1fae5
+        );
+
+    border:
+        1px solid #a7f3d0;
+
+    font-size: 22px;
+}
+
+
+.section-header h2 {
+
+    margin: 0;
+
+    color: #064e3b;
+
+    font-size: 20px;
+}
+
+
+.section-header p {
+
+    margin:
+        4px 0 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   FORM GRID
+========================================================= */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap:
+        20px;
+}
+
+
+.location-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap:
+        20px;
+}
+
+
+.full-width {
+
+    grid-column:
+        1 / -1;
+}
+
+
+/* =========================================================
+   FIELD
+========================================================= */
+
+.field {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.field label {
+
+    color: #334155;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+input,
+select {
+
+    width: 100%;
+
+    min-height: 48px;
+
+    padding:
+        11px 14px;
+
+    border:
+        1px solid #cbd5e1;
+
+    border-radius: 11px;
+
+    background: white;
+
+    color: #1e293b;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color .18s ease,
+        box-shadow .18s ease,
+        transform .18s ease;
+}
+
+
+input::placeholder {
+
+    color: #94a3b8;
+}
+
+
+input:hover,
+select:hover {
+
+    border-color:
+        #94a3b8;
+}
+
+
+input:focus,
+select:focus {
+
+    border-color:
+        #059669;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(5,150,105,.10);
+}
+
+
+select:disabled {
+
+    background:
+        #f1f5f9;
+
+    color:
+        #94a3b8;
+
+    cursor:
+        not-allowed;
+}
+
+
+/* =========================================================
+   EMERGENCY
+========================================================= */
+
+.emergency-section {
+
+    border-color:
+        #fed7aa;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffdf9,
+            #fffaf5
+        );
+}
+
+
+.emergency-icon {
+
+    background:
+        #fff7ed;
+
+    border-color:
+        #fed7aa;
+}
+
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.submit-area {
+
+    text-align: center;
+
+    padding:
+        10px 0
+        25px;
+}
+
+
+.submit-button {
+
+    width: 100%;
+
+    max-width: 520px;
+
+    min-height: 55px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #047857,
+            #059669
+        );
+
+    color: white;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 25px
+        rgba(4,120,87,.22);
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        opacity .18s ease;
+}
+
+
+.submit-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 14px 30px
+        rgba(4,120,87,.28);
+}
+
+
+.submit-button:disabled {
+
+    opacity: .65;
+
+    cursor:
+        not-allowed;
+
+    transform:
+        none;
+}
+
+
+.privacy-note {
+
+    margin:
+        14px 0 0;
+
+    color:
+        #64748b;
+
+    font-size:
+        12px;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.spinner {
+
+    display: inline-block;
+
+    width: 19px;
+    height: 19px;
+
+    border:
+        3px solid
+        rgba(255,255,255,.35);
+
+    border-top-color:
+        white;
+
+    border-radius: 50%;
+
+    animation:
+        spin .8s linear infinite;
+
+    vertical-align: middle;
+}
+
+
+@keyframes spin {
+
+    to {
+        transform:
+            rotate(360deg);
+    }
+
+}
+
+
+.hidden {
+
+    display:
+        none !important;
+}
+
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+.message {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    border-radius: 17px;
+
+    padding:
+        20px;
+
+    margin:
+        20px 0;
+
+    box-shadow:
+        0 7px 22px
+        rgba(15,23,42,.06);
+}
+
+
+.message-icon {
+
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    font-size: 22px;
+
+    flex-shrink: 0;
+}
+
+
+.message h3 {
+
+    margin: 0;
+
+    font-size: 18px;
+}
+
+
+.message p {
+
+    margin:
+        5px 0 0;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+.success-message {
+
+    background:
+        #ecfdf5;
+
+    border:
+        1px solid #a7f3d0;
+
+    color:
+        #065f46;
+}
+
+
+.success-message .message-icon {
+
+    background:
+        #d1fae5;
+}
+
+
+.error-message {
+
+    background:
+        #fff1f2;
+
+    border:
+        1px solid #fecdd3;
+
+    color:
+        #991b1b;
+}
+
+
+.error-message .message-icon {
+
+    background:
+        #ffe4e6;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+    text-align: center;
+
+    padding:
+        32px 20px;
+
+    background:
+        #0f172a;
+
+    color:
+        #cbd5e1;
+
+    font-size: 14px;
+}
+
+
+.footer-church {
+
+    color:
+        white;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    margin-bottom:
+        6px;
+}
+
+
+.footer-small {
+
+    margin-top:
+        10px;
+
+    font-size:
+        12px;
+
+    color:
+        #94a3b8;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+
+    .hero {
+
+        padding:
+            28px 18px
+            32px;
+    }
+
+
+    .hero-content {
+
+        align-items:
+            flex-start;
+    }
+
+
+    .church-logo {
+
+        width: 58px;
+        height: 58px;
+
+        font-size: 28px;
+    }
+
+
+    .church-name {
+
+        font-size: 25px;
+    }
+
+
+    .system-name {
+
+        font-size: 10px;
+    }
+
+
+    .main-container {
+
+        width:
+            calc(100% - 22px);
+
+        margin:
+            18px auto 40px;
+    }
+
+
+    .intro-card {
+
+        align-items:
+            flex-start;
+
+        padding:
+            19px;
+    }
+
+
+    .intro-card h1 {
+
+        font-size: 21px;
+    }
+
+
+    .form-section {
+
+        padding:
+            19px;
+
+        border-radius:
+            18px;
+    }
+
+
+    .form-grid,
+    .location-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .full-width {
+
+        grid-column:
+            auto;
+    }
+
+
+    .section-header {
+
+        align-items:
+            flex-start;
+    }
+
+
+    .section-header h2 {
+
+        font-size:
+            18px;
+    }
+
+
+    input,
+    select {
+
+        min-height:
+            50px;
+    }
+
+}
