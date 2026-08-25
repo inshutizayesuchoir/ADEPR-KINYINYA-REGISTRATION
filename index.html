@@ -2,64 +2,72 @@
 <html lang="rw">
 
 <head>
+
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="description"
-          content="ADEPR Kinyinya - Ifishi yo kwandikisha abakristo">
+    <title>
+        ADEPR KINYINYA | Kwiyandikisha
+    </title>
 
-    <title>ADEPR KINYINYA | Kwiyandikisha</title>
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Supabase JavaScript -->
+    <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </head>
 
 <body>
 
+<!-- =========================================================
+     PAGE
+========================================================= -->
+
 <div class="page-wrapper">
 
     <!-- =====================================================
-         HERO
+         HEADER
     ====================================================== -->
 
     <header class="hero">
 
-        <div class="hero-pattern"></div>
+        <div class="hero-overlay"></div>
 
         <div class="hero-content">
 
-            <div class="church-logo">
+            <div class="church-icon">
                 ⛪
             </div>
 
-            <div>
-                <div class="church-name">
-                    ADEPR KINYINYA
-                </div>
+            <h1>
+                ADEPR KINYINYA
+            </h1>
 
-                <div class="system-name">
-                    CHRISTIAN REGISTRATION
-                </div>
-            </div>
+            <p>
+                Kwiyandikisha k'Umukristo
+            </p>
 
-        </div>
+            <span>
+                Management Information System
+            </span>
 
-        <div class="hero-subtitle">
-            Ifishi yo kwandikisha Umukristo
         </div>
 
     </header>
 
 
     <!-- =====================================================
-         MAIN
+         FORM
     ====================================================== -->
 
-    <main class="main-container">
+    <main class="container">
 
         <div class="intro-card">
 
@@ -69,14 +77,19 @@
 
             <div>
 
-                <h1>
+                <h2>
                     Imyirondoro y'Umukristo
-                </h1>
+                </h2>
 
                 <p>
-                    Uzuza amakuru y'umukristo uko ushoboye.
-                    Ushobora gusiga ahantu utazi ubusa.
+                    Uzuza amakuru akurikira kugira ngo wiyandikishe
+                    muri ADEPR Kinyinya.
                 </p>
+
+                <small>
+                    <b>*</b> Amazina ni yo yonyine asabwa.
+                    Ibindi byose ushobora kubisiga ubusa.
+                </small>
 
             </div>
 
@@ -89,9 +102,8 @@
 
         <form id="memberForm">
 
-
             <!-- =============================================
-                 1. PERSONAL INFORMATION
+                 PERSONAL INFORMATION
             ============================================== -->
 
             <section class="form-section">
@@ -104,9 +116,9 @@
 
                     <div>
 
-                        <h2>
+                        <h3>
                             Imyirondoro y'Umukristo
-                        </h2>
+                        </h3>
 
                         <p>
                             Amakuru y'ibanze ajyanye n'umunyamuryango.
@@ -119,10 +131,10 @@
 
                 <div class="form-grid">
 
-                    <div class="field">
+                    <div class="form-group full">
 
-                        <label for="amazina">
-                            Amazina
+                        <label>
+                            Amazina <span>*</span>
                         </label>
 
                         <input
@@ -130,14 +142,15 @@
                             id="amazina"
                             name="amazina"
                             placeholder="Urugero: UWIMANA Jean"
+                            required
                         >
 
                     </div>
 
 
-                    <div class="field">
+                    <div class="form-group">
 
-                        <label for="telephone">
+                        <label>
                             Telephone
                         </label>
 
@@ -145,15 +158,15 @@
                             type="tel"
                             id="telephone"
                             name="telephone"
-                            placeholder="Urugero: 078xxxxxxx"
+                            placeholder="078xxxxxxx"
                         >
 
                     </div>
 
 
-                    <div class="field">
+                    <div class="form-group">
 
-                        <label for="irangamuntu">
+                        <label>
                             Irangamuntu
                         </label>
 
@@ -167,9 +180,9 @@
                     </div>
 
 
-                    <div class="field">
+                    <div class="form-group">
 
-                        <label for="itariki_yamavuko">
+                        <label>
                             Itariki y'amavuko
                         </label>
 
@@ -182,9 +195,9 @@
                     </div>
 
 
-                    <div class="field">
+                    <div class="form-group">
 
-                        <label for="igitsina">
+                        <label>
                             Igitsina
                         </label>
 
@@ -210,9 +223,9 @@
                     </div>
 
 
-                    <div class="field">
+                    <div class="form-group full">
 
-                        <label for="aho_yabatirijwe">
+                        <label>
                             Aho yabatirijwe
                         </label>
 
@@ -231,7 +244,7 @@
 
 
             <!-- =============================================
-                 2. BIRTHPLACE
+                 BIRTHPLACE
             ============================================== -->
 
             <section class="form-section">
@@ -244,9 +257,9 @@
 
                     <div>
 
-                        <h2>
+                        <h3>
                             Aho yavukiye
-                        </h2>
+                        </h3>
 
                         <p>
                             Amakuru y'aho umunyamuryango yavukiye.
@@ -257,69 +270,112 @@
                 </div>
 
 
-                <div class="location-grid">
+                <div class="form-grid">
 
-                    <div class="field">
+                    <div class="form-group">
 
-                        <label for="birth_province">
+                        <label>
                             Intara yavukiyemo
                         </label>
 
-                        <select id="birth_province">
-                            <option value="">Hitamo Intara</option>
+                        <select
+                            id="yavukiye_intara"
+                            name="yavukiye_intara"
+                        >
+
+                            <option value="">
+                                Hitamo Intara
+                            </option>
+
+                            <option value="Kigali">
+                                Kigali
+                            </option>
+
+                            <option value="Iburasirazuba">
+                                Iburasirazuba
+                            </option>
+
+                            <option value="Amajyepfo">
+                                Amajyepfo
+                            </option>
+
+                            <option value="Amajyaruguru">
+                                Amajyaruguru
+                            </option>
+
+                            <option value="Iburengerazuba">
+                                Iburengerazuba
+                            </option>
+
+                            <option value="Hanze y'u Rwanda">
+                                Hanze y'u Rwanda
+                            </option>
+
                         </select>
 
                     </div>
 
 
-                    <div class="field">
+                    <div class="form-group">
 
-                        <label for="birth_district">
+                        <label>
                             Akarere yavukiyemo
                         </label>
 
-                        <select id="birth_district" disabled>
-                            <option value="">Banza uhitemo Intara</option>
-                        </select>
+                        <input
+                            type="text"
+                            id="yavukiye_akarere"
+                            name="yavukiye_akarere"
+                            placeholder="Urugero: Gasabo"
+                        >
 
                     </div>
 
 
-                    <div class="field">
+                    <div class="form-group">
 
-                        <label for="birth_sector">
+                        <label>
                             Umurenge yavukiyemo
                         </label>
 
-                        <select id="birth_sector" disabled>
-                            <option value="">Banza uhitemo Akarere</option>
-                        </select>
+                        <input
+                            type="text"
+                            id="yavukiye_umurenge"
+                            name="yavukiye_umurenge"
+                            placeholder="Urugero: Kinyinya"
+                        >
 
                     </div>
 
 
-                    <div class="field">
+                    <div class="form-group">
 
-                        <label for="birth_cell">
+                        <label>
                             Akagari yavukiyemo
                         </label>
 
-                        <select id="birth_cell" disabled>
-                            <option value="">Banza uhitemo Umurenge</option>
-                        </select>
+                        <input
+                            type="text"
+                            id="yavukiye_akagari"
+                            name="yavukiye_akagari"
+                            placeholder="Urugero: Kagugu"
+                        >
 
                     </div>
 
 
-                    <div class="field full-width">
+                    <div class="form-group full">
 
-                        <label for="birth_village">
+                        <label>
                             Umudugudu yavukiyemo
                         </label>
 
-                        <select id="birth_village" disabled>
-                            <option value="">Banza uhitemo Akagari</option>
-                        </select>
+                        <input
+                            type="text"
+                            id="yavukiye_umudugudu"
+                            name="yavukiye_umudugudu"
+                            placeholder="Izina ry'umudugudu"
+                        >
 
                     </div>
 
@@ -329,7 +385,7 @@
 
 
             <!-- =============================================
-                 3. CURRENT RESIDENCE
+                 CURRENT ADDRESS
             ============================================== -->
 
             <section class="form-section">
@@ -342,9 +398,9 @@
 
                     <div>
 
-                        <h2>
+                        <h3>
                             Aho atuye ubu
-                        </h2>
+                        </h3>
 
                         <p>
                             Aho umunyamuryango asanzwe atuye muri iki gihe.
@@ -355,69 +411,112 @@
                 </div>
 
 
-                <div class="location-grid">
+                <div class="form-grid">
 
-                    <div class="field">
+                    <div class="form-group">
 
-                        <label for="current_province">
+                        <label>
                             Intara atuyemo
                         </label>
 
-                        <select id="current_province">
-                            <option value="">Hitamo Intara</option>
+                        <select
+                            id="atuye_intara"
+                            name="atuye_intara"
+                        >
+
+                            <option value="">
+                                Hitamo Intara
+                            </option>
+
+                            <option value="Kigali">
+                                Kigali
+                            </option>
+
+                            <option value="Iburasirazuba">
+                                Iburasirazuba
+                            </option>
+
+                            <option value="Amajyepfo">
+                                Amajyepfo
+                            </option>
+
+                            <option value="Amajyaruguru">
+                                Amajyaruguru
+                            </option>
+
+                            <option value="Iburengerazuba">
+                                Iburengerazuba
+                            </option>
+
+                            <option value="Hanze y'u Rwanda">
+                                Hanze y'u Rwanda
+                            </option>
+
                         </select>
 
                     </div>
 
 
-                    <div class="field">
+                    <div class="form-group">
 
-                        <label for="current_district">
+                        <label>
                             Akarere atuyemo
                         </label>
 
-                        <select id="current_district" disabled>
-                            <option value="">Banza uhitemo Intara</option>
-                        </select>
+                        <input
+                            type="text"
+                            id="atuye_akarere"
+                            name="atuye_akarere"
+                            placeholder="Urugero: Gasabo"
+                        >
 
                     </div>
 
 
-                    <div class="field">
+                    <div class="form-group">
 
-                        <label for="current_sector">
+                        <label>
                             Umurenge atuyemo
                         </label>
 
-                        <select id="current_sector" disabled>
-                            <option value="">Banza uhitemo Akarere</option>
-                        </select>
+                        <input
+                            type="text"
+                            id="atuye_umurenge"
+                            name="atuye_umurenge"
+                            placeholder="Urugero: Kinyinya"
+                        >
 
                     </div>
 
 
-                    <div class="field">
+                    <div class="form-group">
 
-                        <label for="current_cell">
+                        <label>
                             Akagari atuyemo
                         </label>
 
-                        <select id="current_cell" disabled>
-                            <option value="">Banza uhitemo Umurenge</option>
-                        </select>
+                        <input
+                            type="text"
+                            id="atuye_akagari"
+                            name="atuye_akagari"
+                            placeholder="Urugero: Kagugu"
+                        >
 
                     </div>
 
 
-                    <div class="field full-width">
+                    <div class="form-group full">
 
-                        <label for="current_village">
+                        <label>
                             Umudugudu atuyemo
                         </label>
 
-                        <select id="current_village" disabled>
-                            <option value="">Banza uhitemo Akagari</option>
-                        </select>
+                        <input
+                            type="text"
+                            id="atuye_umudugudu"
+                            name="atuye_umudugudu"
+                            placeholder="Izina ry'umudugudu"
+                        >
 
                     </div>
 
@@ -427,7 +526,7 @@
 
 
             <!-- =============================================
-                 4. CHURCH INFORMATION
+                 CHURCH INFORMATION
             ============================================== -->
 
             <section class="form-section">
@@ -440,9 +539,9 @@
 
                     <div>
 
-                        <h2>
+                        <h3>
                             Amakuru y'Itorero
-                        </h2>
+                        </h3>
 
                         <p>
                             Amakuru ajyanye n'umurimo n'uruhare mu itorero.
@@ -455,28 +554,32 @@
 
                 <div class="form-grid">
 
-                    <div class="field">
+                    <div class="form-group">
 
-                        <label for="igihande">
+                        <label>
                             Igihande abarizwamo
                         </label>
 
                         <input
                             type="text"
                             id="igihande"
-                            placeholder="Urugero: Igihande cya Kinyinya"
+                            name="igihande"
+                            placeholder="Urugero: Kinyinya"
                         >
 
                     </div>
 
 
-                    <div class="field">
+                    <div class="form-group">
 
-                        <label for="umurimo_itorero">
+                        <label>
                             Umurimo akora mu itorero
                         </label>
 
-                        <select id="umurimo_itorero">
+                        <select
+                            id="umurimo_itorero"
+                            name="umurimo_itorero"
+                        >
 
                             <option value="">
                                 Hitamo
@@ -503,15 +606,16 @@
                     </div>
 
 
-                    <div class="field full-width">
+                    <div class="form-group full">
 
-                        <label for="chorale">
+                        <label>
                             Chorale aririmbamo
                         </label>
 
                         <input
                             type="text"
                             id="chorale"
+                            name="chorale"
                             placeholder="Urugero: Inshuti za Yesu"
                         >
 
@@ -523,10 +627,10 @@
 
 
             <!-- =============================================
-                 5. EMERGENCY CONTACT
+                 EMERGENCY CONTACT
             ============================================== -->
 
-            <section class="form-section emergency-section">
+            <section class="form-section">
 
                 <div class="section-header">
 
@@ -536,9 +640,9 @@
 
                     <div>
 
-                        <h2>
+                        <h3>
                             Uwo bahamagara habaye ikibazo
-                        </h2>
+                        </h3>
 
                         <p>
                             Umuntu wahamagazwa mu gihe habaye ikibazo cyihutirwa.
@@ -549,21 +653,32 @@
                 </div>
 
 
-                <div class="field">
+                <div class="form-group">
 
-                    <label for="emergency_contact">
+                    <label>
                         Amazina na Telephone
                     </label>
 
                     <input
                         type="text"
                         id="emergency_contact"
+                        name="emergency_contact"
                         placeholder="Urugero: Jean Bosco - 078xxxxxxx"
                     >
 
                 </div>
 
             </section>
+
+
+            <!-- =============================================
+                 MESSAGE
+            ============================================== -->
+
+            <div
+                id="message"
+                class="message"
+            ></div>
 
 
             <!-- =============================================
@@ -575,7 +690,6 @@
                 <button
                     type="submit"
                     id="submitButton"
-                    class="submit-button"
                 >
 
                     <span id="buttonText">
@@ -583,80 +697,22 @@
                     </span>
 
                     <span
-                        id="loadingSpinner"
-                        class="spinner hidden"
-                    ></span>
+                        id="loadingText"
+                        style="display:none;"
+                    >
+                        ⏳ Birimo kubikwa...
+                    </span>
 
                 </button>
 
-
-                <p class="privacy-note">
-                    🔒 Amakuru watanze abikwa muri ADEPR Kinyinya
-                    Management Information System.
+                <p>
+                    Nyuma yo kohereza amakuru,
+                    azahita abikwa muri ADEPR KINYINYA MIS.
                 </p>
 
             </div>
-
 
         </form>
-
-
-        <!-- =================================================
-             SUCCESS MESSAGE
-        ================================================== -->
-
-        <div
-            id="successMessage"
-            class="message success-message hidden"
-        >
-
-            <div class="message-icon">
-                ✅
-            </div>
-
-            <div>
-
-                <h3>
-                    Amakuru yabitswe neza!
-                </h3>
-
-                <p>
-                    Murakoze kwiyandikisha.
-                    Amakuru yanyu ageze muri ADEPR Kinyinya MIS.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- =================================================
-             ERROR MESSAGE
-        ================================================== -->
-
-        <div
-            id="errorMessage"
-            class="message error-message hidden"
-        >
-
-            <div class="message-icon">
-                ⚠️
-            </div>
-
-            <div>
-
-                <h3>
-                    Habaye ikibazo
-                </h3>
-
-                <p id="errorText">
-                    Ntabwo amakuru yabitswe.
-                </p>
-
-            </div>
-
-        </div>
-
 
     </main>
 
@@ -665,26 +721,30 @@
          FOOTER
     ====================================================== -->
 
-    <footer class="footer">
+    <footer>
 
-        <div class="footer-church">
-            ⛪ ADEPR KINYINYA
+        <div class="footer-logo">
+            ⛪
         </div>
 
-        <div>
+        <h3>
+            ADEPR KINYINYA
+        </h3>
+
+        <p>
             Management Information System
-        </div>
+        </p>
 
-        <div class="footer-small">
+        <small>
             © 2026 ADEPR Kinyinya
-        </div>
+        </small>
 
     </footer>
 
 </div>
 
 
-<script src="script.js"></script>
+<script src="app.js"></script>
 
 </body>
 
