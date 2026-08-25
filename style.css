@@ -1,7 +1,6 @@
-/* =========================================================
-   ADEPR KINYINYA REGISTRATION
-   GEORGIA PROFESSIONAL DESIGN
-========================================================= */
+/* ============================================================
+   GLOBAL
+============================================================ */
 
 * {
     box-sizing: border-box;
@@ -21,33 +20,37 @@ body {
         serif;
 
     background:
-        linear-gradient(
-            135deg,
-            #f8fafc 0%,
-            #eef5f2 50%,
-            #f8fafc 100%
-        );
+        #f5f7f6;
 
-    color: #1e293b;
+    color:
+        #1f2937;
 }
 
 
-/* =========================================================
+/* ============================================================
    PAGE
-========================================================= */
+============================================================ */
 
 .page-wrapper {
     min-height: 100vh;
 }
 
 
-/* =========================================================
+/* ============================================================
    HERO
-========================================================= */
+============================================================ */
 
 .hero {
-
     position: relative;
+
+    min-height: 300px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
 
     overflow: hidden;
 
@@ -55,194 +58,161 @@ body {
         linear-gradient(
             135deg,
             #064e3b,
-            #047857 55%,
+            #047857,
             #059669
         );
-
-    color: white;
-
-    padding:
-        38px 24px
-        42px;
-
-    box-shadow:
-        0 12px 40px
-        rgba(6, 78, 59, .20);
 }
 
-
-.hero-pattern {
-
-    position: absolute;
-
-    width: 360px;
-    height: 360px;
-
-    right: -130px;
-    top: -200px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255,255,255,.07);
-}
-
-
-.hero-pattern::after {
-
+.hero::before {
     content: "";
 
     position: absolute;
 
-    width: 250px;
-    height: 250px;
-
-    left: -420px;
-    top: 250px;
+    width: 450px;
+    height: 450px;
 
     border-radius: 50%;
 
     background:
-        rgba(255,255,255,.05);
+        rgba(255,255,255,0.07);
+
+    top: -250px;
+    right: -100px;
 }
 
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    bottom: -180px;
+    left: -70px;
+}
+
+.hero-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,0,0,0.08),
+            transparent
+        );
+}
 
 .hero-content {
-
     position: relative;
 
     z-index: 2;
 
-    max-width: 1100px;
-
-    margin: auto;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 18px;
+    color: white;
 }
 
+.church-icon {
+    width: 75px;
+    height: 75px;
 
-.church-logo {
-
-    width: 70px;
-    height: 70px;
+    margin: auto auto 16px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    border-radius: 20px;
+    border-radius: 22px;
 
     background:
-        rgba(255,255,255,.14);
+        rgba(255,255,255,0.15);
 
     border:
-        1px solid
-        rgba(255,255,255,.22);
+        1px solid rgba(255,255,255,0.25);
 
-    font-size: 35px;
+    font-size: 38px;
 
     box-shadow:
-        0 8px 25px
-        rgba(0,0,0,.12);
+        0 12px 30px rgba(0,0,0,0.15);
 }
 
+.hero h1 {
+    margin: 0;
 
-.church-name {
+    font-size: 42px;
 
-    font-size: 32px;
+    letter-spacing: 1px;
 
     font-weight: 700;
+}
 
-    letter-spacing: .4px;
+.hero p {
+    margin: 10px 0 5px;
+
+    font-size: 21px;
+}
+
+.hero span {
+    color:
+        rgba(255,255,255,0.82);
+
+    font-size: 14px;
 }
 
 
-.system-name {
+/* ============================================================
+   CONTAINER
+============================================================ */
 
-    margin-top: 5px;
+.container {
+    width: min(1100px, 92%);
 
-    font-size: 13px;
-
-    letter-spacing: 2px;
-
-    opacity: .82;
-}
-
-
-.hero-subtitle {
+    margin:
+        -45px auto 60px;
 
     position: relative;
 
-    z-index: 2;
-
-    max-width: 1100px;
-
-    margin:
-        22px auto 0;
-
-    font-size: 16px;
-
-    color:
-        rgba(255,255,255,.88);
+    z-index: 5;
 }
 
 
-/* =========================================================
-   MAIN
-========================================================= */
-
-.main-container {
-
-    width: min(
-        1100px,
-        calc(100% - 32px)
-    );
-
-    margin:
-        30px auto
-        60px;
-}
-
-
-/* =========================================================
+/* ============================================================
    INTRO
-========================================================= */
+============================================================ */
 
 .intro-card {
-
     display: flex;
+
+    gap: 18px;
 
     align-items: center;
 
-    gap: 17px;
-
     background:
-        rgba(255,255,255,.96);
+        rgba(255,255,255,0.97);
 
-    border:
-        1px solid #dbe4e8;
+    padding: 25px;
 
     border-radius: 20px;
 
-    padding: 23px 25px;
-
-    margin-bottom: 22px;
+    border:
+        1px solid #e2e8f0;
 
     box-shadow:
-        0 8px 25px
-        rgba(15,23,42,.05);
+        0 12px 35px rgba(15,23,42,0.08);
+
+    margin-bottom: 22px;
 }
 
-
 .intro-icon {
-
-    width: 52px;
-    height: 52px;
+    width: 55px;
+    height: 55px;
 
     flex-shrink: 0;
 
@@ -256,62 +226,69 @@ body {
     background:
         #ecfdf5;
 
-    border:
-        1px solid #a7f3d0;
-
-    font-size: 24px;
+    font-size: 27px;
 }
 
+.intro-card h2 {
+    margin:
+        0 0 5px;
 
-.intro-card h1 {
+    color:
+        #064e3b;
 
-    margin: 0;
-
-    color: #064e3b;
-
-    font-size: 25px;
+    font-size: 23px;
 }
-
 
 .intro-card p {
-
     margin:
-        6px 0 0;
+        0 0 7px;
 
-    color: #64748b;
+    color:
+        #64748b;
 
     font-size: 14px;
+}
 
-    line-height: 1.6;
+.intro-card small {
+    color:
+        #475569;
+
+    font-size: 12px;
+}
+
+.intro-card small b {
+    color:
+        #dc2626;
 }
 
 
-/* =========================================================
+/* ============================================================
    FORM SECTION
-========================================================= */
+============================================================ */
 
 .form-section {
-
     background:
-        rgba(255,255,255,.97);
+        rgba(255,255,255,0.97);
 
     border:
-        1px solid #dbe4e8;
+        1px solid #e2e8f0;
 
-    border-radius: 22px;
+    border-radius: 20px;
 
     padding: 27px;
 
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 
     box-shadow:
-        0 8px 28px
-        rgba(15,23,42,.055);
+        0 8px 28px rgba(15,23,42,0.055);
 }
 
 
-.section-header {
+/* ============================================================
+   SECTION HEADER
+============================================================ */
 
+.section-header {
     display: flex;
 
     align-items: center;
@@ -320,15 +297,13 @@ body {
 
     padding-bottom: 18px;
 
-    margin-bottom: 21px;
+    margin-bottom: 22px;
 
     border-bottom:
         1px solid #e5e7eb;
 }
 
-
 .section-icon {
-
     width: 48px;
     height: 48px;
 
@@ -354,107 +329,105 @@ body {
     font-size: 22px;
 }
 
+.emergency-icon {
+    background:
+        linear-gradient(
+            135deg,
+            #fff7ed,
+            #ffedd5
+        );
 
-.section-header h2 {
+    border-color:
+        #fed7aa;
+}
 
-    margin: 0;
+.section-header h3 {
+    margin:
+        0 0 4px;
 
-    color: #064e3b;
+    color:
+        #064e3b;
 
     font-size: 20px;
 }
 
-
 .section-header p {
+    margin: 0;
 
-    margin:
-        4px 0 0;
-
-    color: #64748b;
+    color:
+        #64748b;
 
     font-size: 13px;
-
-    line-height: 1.5;
 }
 
 
-/* =========================================================
-   FORM GRID
-========================================================= */
+/* ============================================================
+   GRID
+============================================================ */
 
 .form-grid {
-
     display: grid;
 
     grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+        repeat(2, 1fr);
 
     gap:
         20px;
 }
 
-
-.location-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    gap:
-        20px;
-}
-
-
-.full-width {
-
+.form-group.full {
     grid-column:
         1 / -1;
 }
 
 
-/* =========================================================
-   FIELD
-========================================================= */
+/* ============================================================
+   LABELS
+============================================================ */
 
-.field {
+.form-group label {
+    display: block;
 
-    display: flex;
+    margin-bottom: 7px;
 
-    flex-direction: column;
+    color:
+        #334155;
 
-    gap: 8px;
-}
-
-
-.field label {
-
-    color: #334155;
-
-    font-size: 14px;
+    font-size: 13px;
 
     font-weight: 700;
 }
 
+.form-group label span {
+    color:
+        #dc2626;
+}
+
+
+/* ============================================================
+   INPUTS
+============================================================ */
 
 input,
 select {
 
     width: 100%;
 
-    min-height: 48px;
+    height: 48px;
 
     padding:
-        11px 14px;
+        0 14px;
 
     border:
         1px solid #cbd5e1;
 
     border-radius: 11px;
 
-    background: white;
+    background:
+        white;
 
-    color: #1e293b;
+    color:
+        #1e293b;
 
     font-family:
         Georgia,
@@ -466,17 +439,13 @@ select {
     outline: none;
 
     transition:
-        border-color .18s ease,
-        box-shadow .18s ease,
-        transform .18s ease;
+        all 0.2s ease;
 }
-
 
 input::placeholder {
-
-    color: #94a3b8;
+    color:
+        #94a3b8;
 }
-
 
 input:hover,
 select:hover {
@@ -484,7 +453,6 @@ select:hover {
     border-color:
         #94a3b8;
 }
-
 
 input:focus,
 select:focus {
@@ -494,72 +462,28 @@ select:focus {
 
     box-shadow:
         0 0 0 3px
-        rgba(5,150,105,.10);
+        rgba(5,150,105,0.10);
 }
 
 
-select:disabled {
-
-    background:
-        #f1f5f9;
-
-    color:
-        #94a3b8;
-
-    cursor:
-        not-allowed;
-}
-
-
-/* =========================================================
-   EMERGENCY
-========================================================= */
-
-.emergency-section {
-
-    border-color:
-        #fed7aa;
-
-    background:
-        linear-gradient(
-            135deg,
-            #fffdf9,
-            #fffaf5
-        );
-}
-
-
-.emergency-icon {
-
-    background:
-        #fff7ed;
-
-    border-color:
-        #fed7aa;
-}
-
-
-/* =========================================================
+/* ============================================================
    SUBMIT
-========================================================= */
+============================================================ */
 
 .submit-area {
-
     text-align: center;
 
     padding:
-        10px 0
-        25px;
+        10px 0 35px;
 }
 
-
-.submit-button {
+.submit-area button {
 
     width: 100%;
 
-    max-width: 520px;
+    max-width: 500px;
 
-    min-height: 55px;
+    min-height: 52px;
 
     border: none;
 
@@ -579,7 +503,7 @@ select:disabled {
         "Times New Roman",
         serif;
 
-    font-size: 17px;
+    font-size: 16px;
 
     font-weight: 700;
 
@@ -587,29 +511,25 @@ select:disabled {
 
     box-shadow:
         0 10px 25px
-        rgba(4,120,87,.22);
+        rgba(5,150,105,0.20);
 
     transition:
-        transform .18s ease,
-        box-shadow .18s ease,
-        opacity .18s ease;
+        all 0.2s ease;
 }
 
-
-.submit-button:hover {
+.submit-area button:hover {
 
     transform:
         translateY(-2px);
 
     box-shadow:
         0 14px 30px
-        rgba(4,120,87,.28);
+        rgba(5,150,105,0.28);
 }
 
+.submit-area button:disabled {
 
-.submit-button:disabled {
-
-    opacity: .65;
+    opacity: 0.7;
 
     cursor:
         not-allowed;
@@ -618,128 +538,44 @@ select:disabled {
         none;
 }
 
-
-.privacy-note {
-
-    margin:
-        14px 0 0;
+.submit-area p {
 
     color:
         #64748b;
 
-    font-size:
-        12px;
+    font-size: 12px;
+
+    margin-top: 12px;
 }
 
 
-/* =========================================================
-   LOADING
-========================================================= */
-
-.spinner {
-
-    display: inline-block;
-
-    width: 19px;
-    height: 19px;
-
-    border:
-        3px solid
-        rgba(255,255,255,.35);
-
-    border-top-color:
-        white;
-
-    border-radius: 50%;
-
-    animation:
-        spin .8s linear infinite;
-
-    vertical-align: middle;
-}
-
-
-@keyframes spin {
-
-    to {
-        transform:
-            rotate(360deg);
-    }
-
-}
-
-
-.hidden {
-
-    display:
-        none !important;
-}
-
-
-/* =========================================================
-   MESSAGES
-========================================================= */
+/* ============================================================
+   MESSAGE
+============================================================ */
 
 .message {
 
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-    border-radius: 17px;
+    display: none;
 
     padding:
-        20px;
+        15px 18px;
+
+    border-radius:
+        12px;
 
     margin:
-        20px 0;
+        10px 0 20px;
 
-    box-shadow:
-        0 7px 22px
-        rgba(15,23,42,.06);
+    font-size:
+        14px;
+
+    font-weight:
+        700;
 }
 
+.message.success {
 
-.message-icon {
-
-    width: 45px;
-    height: 45px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 13px;
-
-    font-size: 22px;
-
-    flex-shrink: 0;
-}
-
-
-.message h3 {
-
-    margin: 0;
-
-    font-size: 18px;
-}
-
-
-.message p {
-
-    margin:
-        5px 0 0;
-
-    font-size: 13px;
-
-    line-height: 1.5;
-}
-
-
-.success-message {
+    display: block;
 
     background:
         #ecfdf5;
@@ -751,194 +587,156 @@ select:disabled {
         #065f46;
 }
 
+.message.error {
 
-.success-message .message-icon {
-
-    background:
-        #d1fae5;
-}
-
-
-.error-message {
+    display: block;
 
     background:
-        #fff1f2;
+        #fef2f2;
 
     border:
-        1px solid #fecdd3;
+        1px solid #fecaca;
 
     color:
         #991b1b;
 }
 
 
-.error-message .message-icon {
-
-    background:
-        #ffe4e6;
-}
-
-
-/* =========================================================
+/* ============================================================
    FOOTER
-========================================================= */
+============================================================ */
 
-.footer {
+footer {
 
-    text-align: center;
-
-    padding:
-        32px 20px;
+    text-align:
+        center;
 
     background:
         #0f172a;
 
     color:
-        #cbd5e1;
-
-    font-size: 14px;
-}
-
-
-.footer-church {
-
-    color:
         white;
 
-    font-size: 18px;
-
-    font-weight: 700;
-
-    margin-bottom:
-        6px;
+    padding:
+        40px 20px;
 }
 
+.footer-logo {
 
-.footer-small {
+    width: 50px;
+    height: 50px;
 
-    margin-top:
-        10px;
+    margin:
+        0 auto 12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    border-radius:
+        14px;
 
     font-size:
-        12px;
+        25px;
+}
+
+footer h3 {
+
+    margin:
+        0 0 5px;
+
+    font-size:
+        19px;
+}
+
+footer p {
+
+    margin:
+        0 0 15px;
 
     color:
         #94a3b8;
+
+    font-size:
+        13px;
+}
+
+footer small {
+
+    color:
+        #64748b;
+
+    font-size:
+        11px;
 }
 
 
-/* =========================================================
+/* ============================================================
    MOBILE
-========================================================= */
+============================================================ */
 
-@media (max-width: 760px) {
+@media (max-width: 700px) {
 
     .hero {
-
-        padding:
-            28px 18px
-            32px;
+        min-height:
+            260px;
     }
 
-
-    .hero-content {
-
-        align-items:
-            flex-start;
+    .hero h1 {
+        font-size:
+            31px;
     }
 
-
-    .church-logo {
-
-        width: 58px;
-        height: 58px;
-
-        font-size: 28px;
+    .hero p {
+        font-size:
+            17px;
     }
 
-
-    .church-name {
-
-        font-size: 25px;
-    }
-
-
-    .system-name {
-
-        font-size: 10px;
-    }
-
-
-    .main-container {
-
+    .container {
         width:
-            calc(100% - 22px);
+            94%;
 
-        margin:
-            18px auto 40px;
+        margin-top:
+            -30px;
     }
-
 
     .intro-card {
-
         align-items:
             flex-start;
 
         padding:
-            19px;
+            20px;
     }
-
-
-    .intro-card h1 {
-
-        font-size: 21px;
-    }
-
 
     .form-section {
-
         padding:
-            19px;
-
-        border-radius:
-            18px;
+            20px;
     }
 
-
-    .form-grid,
-    .location-grid {
-
+    .form-grid {
         grid-template-columns:
             1fr;
+
+        gap:
+            17px;
     }
 
-
-    .full-width {
-
+    .form-group.full {
         grid-column:
             auto;
     }
 
-
-    .section-header {
-
-        align-items:
-            flex-start;
-    }
-
-
-    .section-header h2 {
-
+    .section-header h3 {
         font-size:
-            18px;
+            17px;
     }
 
-
-    input,
-    select {
-
-        min-height:
-            50px;
+    .section-header p {
+        font-size:
+            12px;
     }
-
 }
