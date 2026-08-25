@@ -8,7 +8,7 @@ from supabase import create_client
 # ============================================================
 
 st.set_page_config(
-    page_title="ADEPR KINYINYA | Kwiyandikisha",
+    page_title="ADEPR KINYINYA - Kwiyandikisha",
     page_icon="⛪",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -16,311 +16,109 @@ st.set_page_config(
 
 
 # ============================================================
-# SUPABASE CONNECTION
+# SUPABASE
 # ============================================================
 
-@st.cache_resource
-def get_supabase():
+SUPABASE_URL = st.secrets["SUPABASE_URL"]
+SUPABASE_KEY = st.secrets["SUPABASE_KEY"]
 
-    try:
-        url = st.secrets["SUPABASE_URL"]
-        key = st.secrets["SUPABASE_KEY"]
-
-        return create_client(url, key)
-
-    except Exception as e:
-
-        st.error(
-            "❌ Ntibyashobotse guhuza na Supabase."
-        )
-
-        st.code(str(e))
-
-        st.stop()
-
-
-supabase = get_supabase()
+supabase = create_client(
+    SUPABASE_URL,
+    SUPABASE_KEY
+)
 
 
 # ============================================================
-# GLOBAL CSS
+# CSS — GEORGIA PROFESSIONAL DESIGN
 # ============================================================
 
 st.markdown(
     """
     <style>
 
-    /* ========================================================
-       GLOBAL
-    ======================================================== */
-
-    html,
-    body,
-    [class*="css"],
-    [class*="st-"],
-    .stApp {
-
-        font-family:
-            Georgia,
-            "Times New Roman",
-            serif !important;
+    * {
+        font-family: Georgia, "Times New Roman", serif !important;
     }
 
-
     .stApp {
-
         background:
             radial-gradient(
-                circle at 5% 5%,
-                rgba(30, 58, 138, 0.10),
-                transparent 25%
+                circle at 10% 10%,
+                rgba(16,185,129,0.10),
+                transparent 28%
             ),
-
             radial-gradient(
-                circle at 95% 10%,
-                rgba(5, 150, 105, 0.10),
-                transparent 25%
+                circle at 90% 10%,
+                rgba(30,64,175,0.10),
+                transparent 28%
             ),
-
             linear-gradient(
                 135deg,
-                #f8fafc 0%,
-                #eef2ff 50%,
-                #f8fafc 100%
+                #f8fafc,
+                #eef2f7
             );
     }
 
-
     .block-container {
-
-        max-width: 1200px !important;
-
-        padding-top: 2rem !important;
-        padding-bottom: 4rem !important;
+        max-width: 1050px;
+        padding-top: 2rem;
+        padding-bottom: 4rem;
     }
 
-
-    /* ========================================================
-       HIDE STREAMLIT ELEMENTS
-       ======================================================== */
-
-    #MainMenu {
-        visibility: hidden;
-    }
-
-    footer {
-        visibility: hidden;
-    }
-
-    header {
-        visibility: hidden;
-    }
-
-
-    /* ========================================================
-       HERO
-       ======================================================== */
+    /* HEADER */
 
     .hero {
-
-        position: relative;
-
-        overflow: hidden;
-
         background:
             linear-gradient(
                 135deg,
-                #172554 0%,
-                #1e3a8a 45%,
-                #047857 100%
+                #064e3b,
+                #047857,
+                #059669
             );
 
         border-radius: 28px;
 
-        padding:
-            45px
-            40px
-            42px
-            40px;
+        padding: 42px 35px;
+
+        text-align: center;
+
+        color: white;
 
         margin-bottom: 25px;
 
-        color: white;
-
         box-shadow:
-            0 22px 55px
-            rgba(15, 23, 42, 0.20);
+            0 20px 45px rgba(6,78,59,0.20);
     }
-
-
-    .hero::before {
-
-        content: "";
-
-        position: absolute;
-
-        width: 300px;
-        height: 300px;
-
-        right: -100px;
-        top: -150px;
-
-        border-radius: 50%;
-
-        background:
-            rgba(255,255,255,0.08);
-    }
-
-
-    .hero::after {
-
-        content: "";
-
-        position: absolute;
-
-        width: 220px;
-        height: 220px;
-
-        left: 45%;
-        bottom: -150px;
-
-        border-radius: 50%;
-
-        background:
-            rgba(255,255,255,0.06);
-    }
-
-
-    .hero-content {
-
-        position: relative;
-
-        z-index: 2;
-    }
-
 
     .hero-icon {
-
-        width: 70px;
-        height: 70px;
-
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-
-        background:
-            rgba(255,255,255,0.14);
-
-        border:
-            1px solid
-            rgba(255,255,255,0.22);
-
-        border-radius: 20px;
-
-        font-size: 36px;
-
-        margin-bottom: 18px;
+        font-size: 52px;
+        margin-bottom: 8px;
     }
 
-
-    .hero-title {
-
+    .hero h1 {
         font-size: 38px;
-
-        font-weight: 700;
-
-        line-height: 1.15;
-
         margin: 0;
-
         color: white;
-    }
-
-
-    .hero-subtitle {
-
-        font-size: 18px;
-
-        margin-top: 9px;
-
-        color:
-            rgba(255,255,255,0.90);
-    }
-
-
-    .hero-description {
-
-        max-width: 760px;
-
-        margin-top: 14px;
-
-        font-size: 14px;
-
-        line-height: 1.7;
-
-        color:
-            rgba(255,255,255,0.82);
-    }
-
-
-    /* ========================================================
-       WELCOME NOTICE
-       ======================================================== */
-
-    .welcome-card {
-
-        background:
-            rgba(255,255,255,0.95);
-
-        border:
-            1px solid #dbeafe;
-
-        border-left:
-            5px solid #1e3a8a;
-
-        border-radius: 18px;
-
-        padding: 20px 22px;
-
-        margin-bottom: 22px;
-
-        box-shadow:
-            0 8px 25px
-            rgba(15,23,42,0.06);
-    }
-
-
-    .welcome-title {
-
-        color: #172554;
-
-        font-size: 20px;
-
         font-weight: 700;
-
-        margin-bottom: 5px;
     }
 
-
-    .welcome-text {
-
-        color: #64748b;
-
-        font-size: 13px;
-
-        line-height: 1.7;
+    .hero h2 {
+        font-size: 20px;
+        margin-top: 8px;
+        color: rgba(255,255,255,0.90);
+        font-weight: 400;
     }
 
+    .hero p {
+        font-size: 14px;
+        margin-top: 15px;
+        color: rgba(255,255,255,0.82);
+    }
 
-    /* ========================================================
-       SECTION CARD
-       ======================================================== */
+    /* CARD */
 
-    .section-card {
-
-        background:
-            rgba(255,255,255,0.97);
+    .card {
+        background: rgba(255,255,255,0.96);
 
         border:
             1px solid #e2e8f0;
@@ -332,199 +130,88 @@ st.markdown(
         margin-bottom: 20px;
 
         box-shadow:
-            0 10px 30px
-            rgba(15,23,42,0.055);
+            0 10px 30px rgba(15,23,42,0.06);
     }
 
+    .card-title {
+        color: #064e3b;
 
-    .section-header {
-
-        display: flex;
-
-        align-items: center;
-
-        gap: 14px;
-
-        margin-bottom: 20px;
-
-        padding-bottom: 16px;
-
-        border-bottom:
-            1px solid #e5e7eb;
-    }
-
-
-    .section-icon {
-
-        width: 48px;
-        height: 48px;
-
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-
-        flex-shrink: 0;
-
-        border-radius: 14px;
-
-        background:
-            linear-gradient(
-                135deg,
-                #eff6ff,
-                #dbeafe
-            );
-
-        border:
-            1px solid #bfdbfe;
-
-        font-size: 23px;
-    }
-
-
-    .section-title {
-
-        color: #172554;
-
-        font-size: 20px;
+        font-size: 22px;
 
         font-weight: 700;
 
-        margin: 0;
+        margin-bottom: 5px;
     }
 
-
-    .section-subtitle {
-
+    .card-description {
         color: #64748b;
 
-        font-size: 12px;
+        font-size: 13px;
 
-        margin-top: 3px;
+        margin-bottom: 20px;
     }
 
-
-    /* ========================================================
-       INPUTS
-       ======================================================== */
+    /* INPUTS */
 
     div[data-baseweb="input"] > div,
     div[data-baseweb="select"] > div,
     div[data-baseweb="textarea"] > div {
 
-        background:
-            white !important;
+        background: white !important;
 
         border:
             1px solid #cbd5e1 !important;
 
-        border-radius:
-            11px !important;
-
-        min-height:
-            44px;
+        border-radius: 11px !important;
     }
-
-
-    div[data-baseweb="input"] > div:hover,
-    div[data-baseweb="select"] > div:hover,
-    div[data-baseweb="textarea"] > div:hover {
-
-        border-color:
-            #64748b !important;
-    }
-
 
     div[data-baseweb="input"] > div:focus-within,
     div[data-baseweb="select"] > div:focus-within,
     div[data-baseweb="textarea"] > div:focus-within {
 
         border-color:
-            #1e3a8a !important;
+            #059669 !important;
 
         box-shadow:
-            0 0 0 2px
-            rgba(30,58,138,0.10) !important;
+            0 0 0 2px rgba(5,150,105,0.10) !important;
     }
 
-
-    .stTextInput label,
-    .stSelectbox label,
-    .stDateInput label {
-
-        color:
-            #334155 !important;
-
-        font-weight:
-            700 !important;
-
-        font-size:
-            13px !important;
+    label {
+        font-weight: 700 !important;
+        color: #334155 !important;
     }
 
-
-    /* ========================================================
-       REQUIRED LABEL
-       ======================================================== */
-
-    .required-note {
-
-        color: #64748b;
-
-        font-size: 12px;
-
-        margin-top: -5px;
-
-        margin-bottom: 15px;
-    }
-
-
-    .required-star {
-
-        color: #dc2626;
-
-        font-weight: 700;
-    }
-
-
-    /* ========================================================
-       SUBMIT BUTTON
-       ======================================================== */
+    /* BUTTON */
 
     .stButton > button {
 
-        min-height: 52px !important;
+        width: 100%;
 
-        border-radius: 13px !important;
+        min-height: 50px;
 
-        font-family:
-            Georgia,
-            "Times New Roman",
-            serif !important;
+        border-radius: 12px;
 
-        font-size: 16px !important;
-
-        font-weight: 700 !important;
-
-        border: none !important;
+        border: none;
 
         background:
             linear-gradient(
                 135deg,
-                #1e3a8a,
-                #047857
-            ) !important;
+                #047857,
+                #059669
+            );
 
-        color: white !important;
+        color: white;
+
+        font-size: 16px;
+
+        font-weight: 700;
 
         box-shadow:
-            0 10px 25px
-            rgba(30,58,138,0.20);
+            0 8px 20px rgba(5,150,105,0.20);
 
         transition:
             all 0.2s ease;
     }
-
 
     .stButton > button:hover {
 
@@ -532,149 +219,68 @@ st.markdown(
             translateY(-2px);
 
         box-shadow:
-            0 14px 30px
-            rgba(30,58,138,0.27);
+            0 12px 25px rgba(5,150,105,0.28);
     }
 
-
-    /* ========================================================
-       SUCCESS CARD
-       ======================================================== */
-
-    .success-card {
-
-        background:
-            linear-gradient(
-                135deg,
-                #ecfdf5,
-                #f0fdf4
-            );
-
-        border:
-            1px solid #86efac;
-
-        border-radius: 20px;
-
-        padding: 30px;
-
-        text-align: center;
-
-        margin: 20px 0;
-
-        box-shadow:
-            0 12px 30px
-            rgba(22,101,52,0.08);
-    }
-
-
-    .success-icon {
-
-        font-size: 50px;
-
-        margin-bottom: 10px;
-    }
-
-
-    .success-title {
-
-        color: #166534;
-
-        font-size: 24px;
-
-        font-weight: 700;
-    }
-
-
-    .success-text {
-
-        color: #475569;
-
-        font-size: 14px;
-
-        margin-top: 8px;
-
-        line-height: 1.7;
-    }
-
-
-    /* ========================================================
-       FOOTER
-       ======================================================== */
+    /* FOOTER */
 
     .footer {
-
         text-align: center;
-
-        padding:
-            25px 10px 10px;
 
         color: #64748b;
 
         font-size: 12px;
 
-        line-height: 1.7;
+        margin-top: 30px;
+
+        padding-top: 20px;
+
+        border-top:
+            1px solid #e2e8f0;
     }
 
+    /* SUCCESS */
 
-    .footer-title {
+    .success-box {
 
-        color: #172554;
+        background:
+            #ecfdf5;
 
-        font-size: 15px;
+        border:
+            1px solid #a7f3d0;
+
+        border-radius: 16px;
+
+        padding: 20px;
+
+        text-align: center;
+
+        color: #065f46;
+
+        font-size: 17px;
 
         font-weight: 700;
 
-        margin-bottom: 3px;
+        margin-bottom: 20px;
     }
 
-
-    /* ========================================================
-       MOBILE
-       ======================================================== */
-
-    @media (max-width: 768px) {
-
-        .block-container {
-
-            padding-left: 1rem !important;
-
-            padding-right: 1rem !important;
-        }
-
+    @media(max-width:768px){
 
         .hero {
-
-            padding: 30px 23px;
-
-            border-radius: 22px;
+            padding: 30px 20px;
         }
 
-
-        .hero-title {
-
+        .hero h1 {
             font-size: 29px;
         }
 
-
-        .hero-subtitle {
-
-            font-size: 16px;
+        .hero h2 {
+            font-size: 17px;
         }
 
-
-        .section-card {
-
+        .card {
             padding: 18px;
-
-            border-radius: 18px;
         }
-
-
-        .section-title {
-
-            font-size: 18px;
-        }
-
     }
 
     </style>
@@ -691,52 +297,16 @@ st.markdown(
     """
     <div class="hero">
 
-        <div class="hero-content">
+        <div class="hero-icon">⛪</div>
 
-            <div class="hero-icon">
-                ⛪
-            </div>
+        <h1>ADEPR KINYINYA</h1>
 
-            <div class="hero-title">
-                ADEPR KINYINYA
-            </div>
+        <h2>Kwiyandikisha nk'Umukristo</h2>
 
-            <div class="hero-subtitle">
-                Kwiyandikisha k'Umukristo
-            </div>
-
-            <div class="hero-description">
-                Murakaza neza ku rubuga rwo kwiyandikisha
-                rw'Itorero rya ADEPR Kinyinya.
-                Uzuza amakuru akurikira kugira ngo
-                amakuru yawe abikwe muri sisitemu y'Itorero.
-            </div>
-
-        </div>
-
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-
-# ============================================================
-# WELCOME
-# ============================================================
-
-st.markdown(
-    """
-    <div class="welcome-card">
-
-        <div class="welcome-title">
-            👋 Murakaza neza
-        </div>
-
-        <div class="welcome-text">
-            Nyamuneka tanga amakuru yawe neza.
-            <b>Amazina ni yo makuru yonyine agomba kuzuzwa.</b>
-            Andi makuru ushobora kuyatanga niba uyafite.
-        </div>
+        <p>
+            Uzuza aya makuru kugira ngo wiyandikishe
+            muri ADEPR Kinyinya.
+        </p>
 
     </div>
     """,
@@ -750,26 +320,15 @@ st.markdown(
 
 st.markdown(
     """
-    <div class="section-card">
+    <div class="card">
 
-        <div class="section-header">
+        <div class="card-title">
+            👤 Imyirondoro y'Umukristo
+        </div>
 
-            <div class="section-icon">
-                👤
-            </div>
-
-            <div>
-
-                <div class="section-title">
-                    Imyirondoro y'Umukristo
-                </div>
-
-                <div class="section-subtitle">
-                    Amakuru y'ibanze ajyanye n'umunyamuryango.
-                </div>
-
-            </div>
-
+        <div class="card-description">
+            Amazina ni yo makuru yonyine asabwa.
+            Andi makuru ushobora kuyuzuza niba uyafite.
         </div>
 
     </div>
@@ -785,56 +344,42 @@ with col1:
 
     amazina = st.text_input(
         "Amazina *",
-        placeholder="Urugero: UWIMANA Jean",
-        key="public_amazina"
+        placeholder="Urugero: UWIMANA Jean"
     )
 
     telephone = st.text_input(
         "Telephone",
-        placeholder="Urugero: 078xxxxxxx",
-        key="public_telephone"
+        placeholder="Urugero: 078xxxxxxx"
     )
 
     irangamuntu = st.text_input(
         "Irangamuntu",
-        placeholder="Nomero y'indangamuntu",
-        key="public_irangamuntu"
+        placeholder="Nomero y'indangamuntu"
     )
-
-
-with col2:
 
     itariki_yamavuko = st.date_input(
         "Itariki y'amavuko",
         value=None,
         min_value=date(1900, 1, 1),
-        max_value=date.today(),
-        key="public_dob"
+        max_value=date.today()
     )
+
+
+with col2:
 
     igitsina = st.selectbox(
         "Igitsina",
         [
-            "",
+            "Hitamo",
             "Gabo",
             "Gore"
-        ],
-        key="public_gender"
+        ]
     )
 
     aho_yabatirijwe = st.text_input(
         "Aho yabatirijwe",
-        placeholder="Urugero: ADEPR Kinyinya",
-        key="public_baptism"
+        placeholder="Urugero: ADEPR Kinyinya"
     )
-
-
-st.markdown(
-    '<div class="required-note">'
-    '<span class="required-star">*</span> Amazina ni yo yonyine asabwa.'
-    '</div>',
-    unsafe_allow_html=True
-)
 
 
 # ============================================================
@@ -843,26 +388,14 @@ st.markdown(
 
 st.markdown(
     """
-    <div class="section-card">
+    <div class="card">
 
-        <div class="section-header">
+        <div class="card-title">
+            📍 Aho Yavukiye
+        </div>
 
-            <div class="section-icon">
-                📍
-            </div>
-
-            <div>
-
-                <div class="section-title">
-                    Aho Yavukiye
-                </div>
-
-                <div class="section-subtitle">
-                    Amakuru y'aho umunyamuryango yavukiye.
-                </div>
-
-            </div>
-
+        <div class="card-description">
+            Amakuru y'aho wavukiye.
         </div>
 
     </div>
@@ -879,42 +412,33 @@ with col1:
     yavukiye_intara = st.selectbox(
         "Intara yavukiyemo",
         [
-            "",
+            "Hitamo",
             "Kigali",
             "Iburasirazuba",
             "Amajyepfo",
             "Amajyaruguru",
             "Iburengerazuba",
             "Hanze y'u Rwanda"
-        ],
-        key="public_birth_province"
+        ]
     )
 
     yavukiye_akarere = st.text_input(
-        "Akarere yavukiyemo",
-        placeholder="Urugero: Gasabo",
-        key="public_birth_district"
+        "Akarere yavukiyemo"
     )
 
     yavukiye_umurenge = st.text_input(
-        "Umurenge yavukiyemo",
-        placeholder="Urugero: Kinyinya",
-        key="public_birth_sector"
+        "Umurenge yavukiyemo"
     )
 
 
 with col2:
 
     yavukiye_akagari = st.text_input(
-        "Akagari yavukiyemo",
-        placeholder="Urugero: Kagugu",
-        key="public_birth_cell"
+        "Akagari yavukiyemo"
     )
 
     yavukiye_umudugudu = st.text_input(
-        "Umudugudu yavukiyemo",
-        placeholder="Izina ry'umudugudu",
-        key="public_birth_village"
+        "Umudugudu yavukiyemo"
     )
 
 
@@ -924,26 +448,14 @@ with col2:
 
 st.markdown(
     """
-    <div class="section-card">
+    <div class="card">
 
-        <div class="section-header">
+        <div class="card-title">
+            🏠 Aho Atuyе Ubu
+        </div>
 
-            <div class="section-icon">
-                🏠
-            </div>
-
-            <div>
-
-                <div class="section-title">
-                    Aho Atuya Ubu
-                </div>
-
-                <div class="section-subtitle">
-                    Aho umunyamuryango asanzwe atuye muri iki gihe.
-                </div>
-
-            </div>
-
+        <div class="card-description">
+            Aho usanzwe utuye muri iki gihe.
         </div>
 
     </div>
@@ -960,42 +472,33 @@ with col1:
     atuye_intara = st.selectbox(
         "Intara atuyemo",
         [
-            "",
+            "Hitamo",
             "Kigali",
             "Iburasirazuba",
             "Amajyepfo",
             "Amajyaruguru",
             "Iburengerazuba",
             "Hanze y'u Rwanda"
-        ],
-        key="public_current_province"
+        ]
     )
 
     atuye_akarere = st.text_input(
-        "Akarere atuyemo",
-        placeholder="Urugero: Gasabo",
-        key="public_current_district"
+        "Akarere atuyemo"
     )
 
     atuye_umurenge = st.text_input(
-        "Umurenge atuyemo",
-        placeholder="Urugero: Kinyinya",
-        key="public_current_sector"
+        "Umurenge atuyemo"
     )
 
 
 with col2:
 
     atuye_akagari = st.text_input(
-        "Akagari atuyemo",
-        placeholder="Urugero: Kagugu",
-        key="public_current_cell"
+        "Akagari atuyemo"
     )
 
     atuye_umudugudu = st.text_input(
-        "Umudugudu atuyemo",
-        placeholder="Izina ry'umudugudu",
-        key="public_current_village"
+        "Umudugudu atuyemo"
     )
 
 
@@ -1005,26 +508,14 @@ with col2:
 
 st.markdown(
     """
-    <div class="section-card">
+    <div class="card">
 
-        <div class="section-header">
+        <div class="card-title">
+            ⛪ Amakuru y'Itorero
+        </div>
 
-            <div class="section-icon">
-                ⛪
-            </div>
-
-            <div>
-
-                <div class="section-title">
-                    Amakuru y'Itorero
-                </div>
-
-                <div class="section-subtitle">
-                    Amakuru ajyanye n'umurimo n'uruhare mu Itorero.
-                </div>
-
-            </div>
-
+        <div class="card-description">
+            Amakuru ajyanye n'aho abarizwa n'umurimo akora.
         </div>
 
     </div>
@@ -1040,20 +531,18 @@ with col1:
 
     igihande = st.text_input(
         "Igihande abarizwamo",
-        placeholder="Urugero: Igihande cya Kinyinya",
-        key="public_igihande"
+        placeholder="Urugero: Igihande cya Kinyinya"
     )
 
     umurimo_itorero = st.selectbox(
-        "Umurimo akora mu Itorero",
+        "Umurimo akora mu itorero",
         [
-            "",
+            "Hitamo",
             "Umuyobozi w'itorero",
             "Umudiyakoni",
             "Umuririmbyi",
             "Umukristo"
-        ],
-        key="public_role"
+        ]
     )
 
 
@@ -1061,105 +550,39 @@ with col2:
 
     chorale = st.text_input(
         "Chorale aririmbamo",
-        placeholder="Urugero: Inshuti za Yesu",
-        key="public_chorale"
+        placeholder="Urugero: Inshuti za Yesu"
+    )
+
+    emergency_contact = st.text_input(
+        "Uwo bahamagara habaye ikibazo",
+        placeholder="Amazina na Telephone"
     )
 
 
 # ============================================================
-# EMERGENCY CONTACT
+# SUBMIT
 # ============================================================
 
-st.markdown(
-    """
-    <div class="section-card">
+st.markdown("<br>", unsafe_allow_html=True)
 
-        <div class="section-header">
+if st.button(
+    "📝 OHEREZA AMAKURU YO KWIYANDIKISHA"
+):
 
-            <div class="section-icon">
-                🚨
-            </div>
-
-            <div>
-
-                <div class="section-title">
-                    Uwo Bahamagara Habaye Ikibazo
-                </div>
-
-                <div class="section-subtitle">
-                    Umuntu wahamagazwa mu gihe habaye ikibazo cyihutirwa.
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-
-emergency_contact = st.text_input(
-    "Amazina na Telephone",
-    placeholder="Urugero: Jean Bosco - 078xxxxxxx",
-    key="public_emergency"
-)
-
-
-# ============================================================
-# SUBMIT AREA
-# ============================================================
-
-st.write("")
-
-
-st.markdown(
-    """
-    <div style="
-        text-align:center;
-        color:#64748b;
-        font-size:13px;
-        margin-bottom:12px;
-    ">
-        Nyuma yo kugenzura amakuru watanze,
-        kanda kuri buto iri hasi.
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-
-submit = st.button(
-    "📨 OHEREZA AMAKURU",
-    use_container_width=True,
-    type="primary"
-)
-
-
-# ============================================================
-# SAVE TO SUPABASE
-# ============================================================
-
-if submit:
-
-    # --------------------------------------------------------
     # ONLY REQUIRED FIELD
-    # --------------------------------------------------------
 
     if not amazina.strip():
 
         st.error(
-            "❌ Amazina arakenewe. "
-            "Nyamuneka andika amazina yawe mbere yo kohereza."
+            "❌ Amazina arakenewe."
         )
 
         st.stop()
 
 
-    # --------------------------------------------------------
+    # ========================================================
     # PREPARE DATA
-    # --------------------------------------------------------
+    # ========================================================
 
     data = {
 
@@ -1179,7 +602,7 @@ if submit:
 
         "igitsina":
             igitsina
-            if igitsina
+            if igitsina != "Hitamo"
             else None,
 
         "aho_yabatirijwe":
@@ -1187,7 +610,7 @@ if submit:
 
         "yavukiye_intara":
             yavukiye_intara
-            if yavukiye_intara
+            if yavukiye_intara != "Hitamo"
             else None,
 
         "yavukiye_akarere":
@@ -1204,7 +627,7 @@ if submit:
 
         "atuye_intara":
             atuye_intara
-            if atuye_intara
+            if atuye_intara != "Hitamo"
             else None,
 
         "atuye_akarere":
@@ -1224,7 +647,7 @@ if submit:
 
         "umurimo_itorero":
             umurimo_itorero
-            if umurimo_itorero
+            if umurimo_itorero != "Hitamo"
             else None,
 
         "chorale":
@@ -1235,9 +658,9 @@ if submit:
     }
 
 
-    # --------------------------------------------------------
-    # INSERT
-    # --------------------------------------------------------
+    # ========================================================
+    # SEND TO SUPABASE
+    # ========================================================
 
     try:
 
@@ -1253,68 +676,44 @@ if submit:
 
             st.markdown(
                 """
-                <div class="success-card">
+                <div class="success-box">
 
-                    <div class="success-icon">
-                        ✅
-                    </div>
+                    ✅ Kwiyandikisha byagenze neza!
 
-                    <div class="success-title">
-                        Amakuru yoherejwe neza!
-                    </div>
+                    <br><br>
 
-                    <div class="success-text">
-                        Murakoze kwiyandikisha muri
-                        <b>ADEPR Kinyinya</b>.
-                        Amakuru yawe yabitswe neza
-                        muri sisitemu y'Itorero.
-                    </div>
+                    Murakoze kwiyandikisha muri
+                    <b>ADEPR Kinyinya</b>.
 
                 </div>
                 """,
                 unsafe_allow_html=True
             )
 
-
             st.balloons()
-
 
         else:
 
             st.error(
-                "❌ Amakuru ntiyabitswe. "
-                "Nyamuneka ongera ugerageze."
+                "❌ Ntabwo amakuru yabitswe."
             )
 
 
     except Exception as e:
 
-        error_text = str(e)
+        error_message = str(e)
 
-        # ----------------------------------------------------
-        # FRIENDLY UNIQUE ID ERROR
-        # ----------------------------------------------------
-
-        if (
-            "duplicate" in error_text.lower()
-            or "unique" in error_text.lower()
-            or "irangamuntu" in error_text.lower()
-        ):
+        if "duplicate" in error_message.lower():
 
             st.error(
-                "❌ Iyi nimero y'irangamuntu isanzwe "
-                "iri muri sisitemu."
+                "❌ Iyi ndangamuntu isanzwe iri muri system."
             )
 
         else:
 
             st.error(
-                "❌ Habaye ikibazo mu kohereza amakuru."
+                f"❌ Habaye ikibazo mu kubika amakuru: {e}"
             )
-
-            with st.expander("Technical details"):
-
-                st.code(error_text)
 
 
 # ============================================================
@@ -1325,19 +724,16 @@ st.markdown(
     """
     <div class="footer">
 
-        <div class="footer-title">
-            ⛪ ADEPR KINYINYA
-        </div>
-
-        Management Information System
+        ⛪ <b>ADEPR KINYINYA</b>
 
         <br>
 
-        Kwiyandikisha k'Umukristo
+        Management Information System
 
         <br><br>
 
         © 2026 ADEPR Kinyinya
+
     </div>
     """,
     unsafe_allow_html=True
